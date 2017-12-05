@@ -8,7 +8,8 @@ var facebookPassword = '!QAZ2wsx';
 
 describe("Register with Email", function () {
     it("Open Registration window", function () {
-        browser.windowHandleMaximize();
+        // browser.windowHandleMaximize();
+        browser.windowHandleFullscreen();
         browser.url('');
         browser.click('//button[.="Sign Up"]');
         browser.pause(1000);
@@ -29,6 +30,7 @@ describe("Register with Email", function () {
         balanceTitle.should.equal('Your balance');
         var balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
+        browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]')
 
     });
     it("Logout", function () {
@@ -54,6 +56,11 @@ describe("Login with Facebook", function () {
     it("Check login with Facebook", function () {
         var userLogin = browser.getText('//span[@class="profile-name"]');
         userLogin.should.equal('QA');
+        var balanceTitle = browser.getText('//div[@class="header-balance-title"]');
+        balanceTitle.should.equal('Your balance');
+        var balanceValue = browser.getText('//div[@class="header-balance-value"]');
+        balanceValue.should.equal('$0.00');
+        browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]')
     });
     it("Logout", function () {
         browser.click('//button[@class="logout-btn"]');
