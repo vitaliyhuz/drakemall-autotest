@@ -1,11 +1,14 @@
 require('chai').should();
-const usernameExistingUser = 'DrakemallQA';
-const existingUserEmail = 'drakemallqa@gmail.com';
-const existingUserPassword = 'testingqa';
+const {
+    passwordForRegistration,
+    usernameForRegistration
+} = require('../constants');
+const { emailForRegistration } = require('../createdEmail.json');
 let nameOfcase;
-let priceOfCase;
+let priceOfсase;
 
-describe("Login with existing User account", function () {
+
+describe("Login with registered User account", function () {
     it("Open Login window", function () {
         // browser.windowHandleMaximize();
         browser.windowHandleFullscreen();
@@ -18,14 +21,14 @@ describe("Login with existing User account", function () {
     it("Login with Email", function () {
         const loginWindowTitle = browser.getText('//span[@class="form-title"]');
         loginWindowTitle.should.equal('Login');
-        browser.setValue('#username',existingUserEmail);
-        browser.setValue('#password',existingUserPassword);
+        browser.setValue('#username',emailForRegistration);
+        browser.setValue('#password',passwordForRegistration);
         browser.click('//button[contains(@class, "form-submit-btn")]');
         browser.pause(3000);
     });
     it("Check Login with Email", function () {
         const userLogin = browser.getText('//span[@class="profile-name"]');
-        userLogin.should.equal(usernameExistingUser);
+        userLogin.should.equal(usernameForRegistration);
         const balanceTitle = browser.getText('//div[@class="header-balance-title"]');
         balanceTitle.should.equal('Your balance');
         const balanceValue = browser.getText('//div[@class="header-balance-value"]');
@@ -39,7 +42,7 @@ describe("Login with existing User account", function () {
 describe("Check Case", function () {
     it("Open View page of Case", function () {
         nameOfcase = browser.getText('//h1[.="Smart Box"]');
-        priceOfCase = browser.getText('//h1[.="Smart Box"]/following-sibling::div[1]');
+        priceOfсase = browser.getText('//h1[.="Smart Box"]/following-sibling::div[1]');
         browser.click('//h1[.="Smart Box"]');
         browser.pause(1000);
     });
@@ -49,7 +52,7 @@ describe("Check Case", function () {
         const nameOfopenedCase = browser.getText('//h1');
         nameOfopenedCase.should.equal(nameOfcase);
         const priceOfOpenedCase = browser.getText('//div[@class="box-detail-price"]');
-        priceOfOpenedCase.should.equal(priceOfCase);
+        priceOfOpenedCase.should.equal(priceOfсase);
         const roulette = browser.isExisting('//div[@class="roulette-container"]');
         roulette.should.equal(true);
         const boxContent = browser.getText('//div[@class="box-detail-content"]');
