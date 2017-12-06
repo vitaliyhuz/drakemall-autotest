@@ -1,6 +1,6 @@
 require('chai').should();
 var timestamp = + new Date();
-var emailForRegistration = 'qadm' + timestamp + '@mailinator.com';
+var emailForRegistration = 'qaat' + timestamp + '@mailinator.com';
 var passwordForRegistration = '!QAZ2wsx';
 var usernameForRegistration = 'QaTester';
 var facebookEmail = '+380981041718';
@@ -9,6 +9,11 @@ var usernameExistingUser = 'DrakemallQA';
 var existingUserEmail = 'drakemallqa@gmail.com';
 var existingUserPassword = 'testingqa';
 
+module.exports={
+    emailForRegistration,
+    passwordForRegistration,
+    usernameForRegistration
+};
 
 describe("Register with Email", function () {
     it("Open Registration window", function () {
