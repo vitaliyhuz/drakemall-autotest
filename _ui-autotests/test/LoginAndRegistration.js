@@ -34,7 +34,7 @@ describe("Register with Email", function () {
         balanceTitle.should.equal('Your balance');
         var balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]')
+        var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
 
     });
@@ -49,7 +49,6 @@ describe("Register with Email", function () {
         signUpButton.should.equal(true);
     });
  });
-
 
 describe("Login with Facebook", function () {
     it("Open Login window", function () {
@@ -72,7 +71,7 @@ describe("Login with Facebook", function () {
         balanceTitle.should.equal('Your balance');
         var balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]')
+        var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
     });
     it("Logout", function () {
@@ -109,7 +108,7 @@ describe("Login with Facebook", function () {
             balanceTitle.should.equal('Your balance');
             var balanceValue = browser.getText('//div[@class="header-balance-value"]');
             balanceValue.should.equal('$0.00');
-            var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]')
+            var addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
             addFundButton.should.equal(true);
 
         });

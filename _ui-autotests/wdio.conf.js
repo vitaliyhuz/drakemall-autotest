@@ -21,8 +21,8 @@ exports.config = {
         LoginAndRegistration: [
             './_ui-autotests/test/**/LoginAndRegistration.js',
         ],
-        LoginWithFacebook: [
-            './_ui-autotests/test/**/LoginWithFB_Concept.js'
+        Game: [
+            './_ui-autotests/test/**/Game.js'
         ]
     },
     exclude: [
