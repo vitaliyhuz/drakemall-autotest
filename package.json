@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "selser": "selenium-standalone",
-    "test-start": "wdio _ui-autotests/wdio.conf.js --suite LoginAndRegistration",
+    "test-start": "wdio _ui-autotests/wdio.conf.js --suite LoginAndRegistration,Game,UserProfile",
     "test-single": "wdio _ui-autotests/wdio.conf.js --suite LoginAndRegistration",
     "test-suites": "wdio _ui-autotests\\wdio.conf.js",
     "selser_update": "selenium-standalone install --config=_ui-autotests/autotest-sel-config.js",

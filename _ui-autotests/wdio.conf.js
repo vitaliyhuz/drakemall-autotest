@@ -21,9 +21,13 @@ exports.config = {
         LoginAndRegistration: [
             './_ui-autotests/test/**/LoginAndRegistration.js',
         ],
+
         Game: [
             './_ui-autotests/test/**/Game.js'
-        ]
+        ],
+        UserProfile: [
+            './_ui-autotests/test/**/UserProfile.js',
+        ],
     },
     exclude: [
         // 'path/to/excluded/files'
