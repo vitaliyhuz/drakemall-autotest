@@ -70,3 +70,36 @@ describe("Add new address (General info)", function () {
         browser.pause(1000);
     });
 });
+
+describe("Edit Delivery address", function () {
+    it("Open User Profile", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+    });
+    it("Open General info tab", function () {
+        browser.click('//button[@class="btn-profileForm"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+    });
+    it("Edit address", function () {
+        browser.click('//a[@class="edit"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+
+        browser.setValue('//input[@name="phone"]', '+380508787879');
+        browser.setValue('//input[@name="street"]','Velyka Vasylkivska ');
+        browser.setValue('//input[@name="building"]','74');
+        browser.setValue('//input[@name="apartment"]','11');
+        browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
+        //Make a check for Message: "Delivery address has been successfully updated!"
+        browser.pause(1000);
+    });
+    it("Check edited address", function () {
+        const addressInfo = browser.getText('//div[@class="address-info"]');
+        addressInfo.should.equal('QaTester\nUkraine, Kyiv 02000\nVelyka Vasylkivska str, b. 74, apt. 11\nPhone: +380508787879');
+    });
+    it("Return to Main Page", function () {
+        browser.click('//a[@class="header-logo"]');
+        browser.pause(1000);
+    });
+});
