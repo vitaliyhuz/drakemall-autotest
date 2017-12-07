@@ -103,3 +103,41 @@ describe("Edit Delivery address", function () {
         browser.pause(1000);
     });
 });
+
+describe("Add new address (Second)", function () {
+    it("Open User Profile", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+    });
+    it("Open General info tab", function () {
+        browser.click('//button[@class="btn-profileForm"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+    });
+    it("Add new address", function () {
+        browser.click('//button[@class="add-address"]');
+        browser.setValue('//input[@name="firstName"]', 'QA');
+        browser.setValue('//input[@name="lastName"]', 'Automation');
+        browser.setValue('//input[@name="phone"]', '+380509999999');
+        browser.setValue('//input[@name="country"]','Ukraine');
+        browser.setValue('//input[@name="region"]','Kyiv city');
+        browser.setValue('//input[@name="city"]','Kyiv');
+        browser.setValue('//input[@name="zipCode"]','02000');
+        browser.setValue('//input[@name="street"]','Baseina Street');
+        browser.setValue('//input[@name="building"]','7');
+        browser.setValue('//input[@name="apartment"]','10');
+        browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
+        //Make a check for Message: "Delivery address has been successfully updated!"
+        browser.pause(1000);
+    });
+    it("Check added second address", function () {
+        const addressInfo = browser.getText('//div[@class="address-info"]');
+        console.log(addressInfo);
+        console.log(addressInfo[1]);
+        addressInfo[1].should.equal ('QaTester\nUkraine, Kyiv 02000\nBaseina Street str, b. 7, apt. 10\nPhone: +380509999999');
+    });
+    it("Return to Main Page", function () {
+        browser.click('//a[@class="header-logo"]');
+        browser.pause(1000);
+    });
+});
