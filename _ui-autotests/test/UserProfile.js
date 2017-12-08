@@ -162,5 +162,35 @@ describe("Set address as Default", function () {
         initiAladdressStatus[0].should.equal('Set as default');
         initiAladdressStatus[1].should.equal('Default');
     });
-    //Add test "Check setting Default address on the Delivery tab"!!!
+    //Add test "Check setting Default address on the Delivery tab" after completed Game tests!!!
+});
+describe("Delete Address", function () {
+    it("Open User Profile", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+    });
+    it("Open General info tab", function () {
+        browser.click('//button[@class="btn-profileForm"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+        browser.pause(1000);
+    });
+    it("Deleting address", function () {
+        const arayOfAddresses = browser.getText('//div[@class="address-controls"]');
+        const quantityOfAddresses = arayOfAddresses.length;
+        quantityOfAddresses.should.equal(2); // Check quantity of added addresses
+        browser.click('//a[@class="default"][1]');
+        //Make a check for Message: "Delivery address has been successfully updated!"
+    });
+    it("Check deleting address", function () {
+        let addresses = browser.getText('//div[@class="address-controls"]');
+        addresses = typeof addresses === 'string' ? [addresses] : addresses;
+        const quantityOfAddresses = addresses.length;
+        quantityOfAddresses.should.equal(1);
+    });
+    it("Return to Main Page", function () {
+        browser.click('//a[@class="header-logo"]');
+        browser.pause(1000);
+    });
+    //Add test "Check deleting address on the Delivery tab" after completed Game tests!!!
 });
