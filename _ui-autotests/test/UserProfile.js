@@ -187,7 +187,11 @@ describe("Delete Address", function () {
         addresses = typeof addresses === 'string' ? [addresses] : addresses;
         const quantityOfAddresses = addresses.length;
         quantityOfAddresses.should.equal(1);
+        // const addressStatus = browser.getText('//div[@class="address-controls"]');
+        // addressStatus.should.equal('Default');
+        //Use after fixing bug DRAKE-206
     });
+
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
         browser.pause(1000);
