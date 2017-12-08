@@ -132,12 +132,35 @@ describe("Add new address (Second)", function () {
     });
     it("Check added second address", function () {
         const addressInfo = browser.getText('//div[@class="address-info"]');
-        console.log(addressInfo);
-        console.log(addressInfo[1]);
         addressInfo[1].should.equal ('QaTester\nUkraine, Kyiv 02000\nBaseina Street str, b. 7, apt. 10\nPhone: +380509999999');
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
         browser.pause(1000);
     });
+});
+describe("Set address as Default", function () {
+    it("Open User Profile", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+    });
+    it("Open General info tab", function () {
+        browser.click('//button[@class="btn-profileForm"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+        browser.pause(1000);
+    });
+    it("Set as default", function () {
+        const initiAladdressStatus = browser.getText('//div[@class="address-controls"]');
+        initiAladdressStatus[0].should.equal('Default');
+        initiAladdressStatus[1].should.equal('Set as default'); //Check initial address status
+        browser.click('//span[.="Set as default"]');
+        //Make a check for Message: "Delivery address has been successfully updated!"
+    });
+    it("Check setting Default address on the General info tab", function () {
+        const initiAladdressStatus = browser.getText('//div[@class="address-controls"]');
+        initiAladdressStatus[0].should.equal('Set as default');
+        initiAladdressStatus[1].should.equal('Default');
+    });
+    //Add test "Check setting Default address on the Delivery tab"!!!
 });

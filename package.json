@@ -1,6 +1,6 @@
 {
   "name": "autotest",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Drakemall autotests",
   "repository": "https://github.com/OlegSimfi/rozetkaSelenium.git",
   "main": "index.js",
