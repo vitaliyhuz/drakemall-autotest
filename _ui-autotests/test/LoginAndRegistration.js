@@ -100,8 +100,6 @@ describe("Login with Facebook", function () {
             loginWindowTitle.should.equal('Login');
         });
         it("Login with Email", function () {
-            const loginWindowTitle = browser.getText('//span[@class="form-title"]');
-            loginWindowTitle.should.equal('Login');
             browser.setValue('#username',existingUserEmail);
             browser.setValue('#password',existingUserPassword);
             browser.click('//button[contains(@class, "form-submit-btn")]');
