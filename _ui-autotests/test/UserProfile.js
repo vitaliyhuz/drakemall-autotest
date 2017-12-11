@@ -58,7 +58,13 @@ describe("Add new address (General info)", function () {
         browser.setValue('//input[@name="building"]','77');
         browser.setValue('//input[@name="apartment"]','9');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
-        //Make a check for Message: "Delivery address has been successfully updated!"
+        const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
+        notificationMessage.should.equal(true);
+        browser.pause(1000);
+        const notificationMessageTitle = browser.getText('//div[@class="notification-title"]');
+        notificationMessageTitle.should.equal('Delivery address!');
+        const notificationMessageText = browser.getText('//div[@class="notification-content"]');
+        notificationMessageText.should.equal('Delivery address has been successfully updated!');
         browser.pause(1000);
     });
     it("Check added address", function () {
@@ -67,7 +73,7 @@ describe("Add new address (General info)", function () {
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
-        browser.pause(1000);
+        browser.pause(3000);
     });
 });
 
@@ -91,7 +97,13 @@ describe("Edit Delivery address", function () {
         browser.setValue('//input[@name="building"]','74');
         browser.setValue('//input[@name="apartment"]','11');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
-        //Make a check for Message: "Delivery address has been successfully updated!"
+        const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
+        notificationMessage.should.equal(true);
+        browser.pause(1000);
+        const notificationMessageTitle = browser.getText('//div[@class="notification-title"]');
+        notificationMessageTitle.should.equal('Delivery address!');
+        const notificationMessageText = browser.getText('//div[@class="notification-content"]');
+        notificationMessageText.should.equal('Delivery address has been successfully updated!');
         browser.pause(1000);
     });
     it("Check edited address", function () {
@@ -100,7 +112,7 @@ describe("Edit Delivery address", function () {
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
-        browser.pause(1000);
+        browser.pause(3000);
     });
 });
 
@@ -127,7 +139,13 @@ describe("Add new address (Second)", function () {
         browser.setValue('//input[@name="building"]','7');
         browser.setValue('//input[@name="apartment"]','10');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
-        //Make a check for Message: "Delivery address has been successfully updated!"
+        const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
+        notificationMessage.should.equal(true);
+        browser.pause(1000);
+        const notificationMessageTitle = browser.getText('//div[@class="notification-title"]');
+        notificationMessageTitle.should.equal('Delivery address!');
+        const notificationMessageText = browser.getText('//div[@class="notification-content"]');
+        notificationMessageText.should.equal('Delivery address has been successfully updated!');
         browser.pause(1000);
     });
     it("Check added second address", function () {
@@ -136,7 +154,7 @@ describe("Add new address (Second)", function () {
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
-        browser.pause(1000);
+        browser.pause(3000);
     });
 });
 describe("Set address as Default", function () {
@@ -155,12 +173,24 @@ describe("Set address as Default", function () {
         initiAladdressStatus[0].should.equal('Default');
         initiAladdressStatus[1].should.equal('Set as default'); //Check initial address status
         browser.click('//span[.="Set as default"]');
-        //Make a check for Message: "Delivery address has been successfully updated!"
+        const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
+        notificationMessage.should.equal(true);
+        browser.pause(1000);
+        const notificationMessageTitle = browser.getText('//div[@class="notification-title"]');
+        notificationMessageTitle.should.equal('Delivery address!');
+        const notificationMessageText = browser.getText('//div[@class="notification-content"]');
+        notificationMessageText.should.equal('Delivery address has been successfully updated!');
+        browser.pause(1000);
     });
     it("Check setting Default address on the General info tab", function () {
         const initiAladdressStatus = browser.getText('//div[@class="address-controls"]');
         initiAladdressStatus[0].should.equal('Set as default');
         initiAladdressStatus[1].should.equal('Default');
+        browser.pause(1000);
+    });
+    it("Return to Main Page", function () {
+        browser.click('//a[@class="header-logo"]');
+        browser.pause(3000);
     });
     //Add test "Check setting Default address on the Delivery tab" after completed Game tests!!!
 });
@@ -173,14 +203,21 @@ describe("Delete Address", function () {
         browser.click('//button[@class="btn-profileForm"]');
         const titleOfTab = browser.getText('//h2');
         titleOfTab.should.equal ("Delivery info");
-        browser.pause(1000);
+        browser.pause(3000);
     });
     it("Deleting address", function () {
         const arayOfAddresses = browser.getText('//div[@class="address-controls"]');
         const quantityOfAddresses = arayOfAddresses.length;
         quantityOfAddresses.should.equal(2); // Check quantity of added addresses
         browser.click('//a[@class="default"][1]');
-        //Make a check for Message: "Delivery address has been successfully updated!"
+        const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
+        notificationMessage.should.equal(true);
+        browser.pause(1000);
+        const notificationMessageTitle = browser.getText('//div[@class="notification-title"]');
+        notificationMessageTitle.should.equal('Delivery address!');
+        const notificationMessageText = browser.getText('//div[@class="notification-content"]');
+        notificationMessageText.should.equal('Delivery address has been successfully updated!');
+        browser.pause(1000);
     });
     it("Check deleting address", function () {
         let addresses = browser.getText('//div[@class="address-controls"]');
@@ -194,7 +231,7 @@ describe("Delete Address", function () {
 
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
-        browser.pause(1000);
+        browser.pause(3000);
     });
     //Add test "Check deleting address on the Delivery tab" after completed Game tests!!!
 });
