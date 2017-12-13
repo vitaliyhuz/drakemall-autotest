@@ -173,6 +173,7 @@ describe("Set address as Default", function () {
         initiAladdressStatus[0].should.equal('Default');
         initiAladdressStatus[1].should.equal('Set as default'); //Check initial address status
         browser.click('//span[.="Set as default"]');
+        browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
         notificationMessage.should.equal(true);
         browser.pause(1000);
@@ -210,6 +211,7 @@ describe("Delete Address", function () {
         const quantityOfAddresses = arayOfAddresses.length;
         quantityOfAddresses.should.equal(2); // Check quantity of added addresses
         browser.click('//a[@class="default"][1]');
+        browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
         notificationMessage.should.equal(true);
         browser.pause(1000);
