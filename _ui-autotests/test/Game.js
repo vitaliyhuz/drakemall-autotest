@@ -125,6 +125,7 @@ describe("Open Case", function () {
         linkToPrifileText.should.equal('You can withraw it anytime in your profile');
         const linkToPrifile = browser.isExisting('//a[@href="/profile"]');
         linkToPrifile.should.equal(true);
+        browser.click('//button[@class="modal-close"]');
         browser.pause(3000);
     });
     // it("Check Live drop", function () {
@@ -150,7 +151,6 @@ describe("Open Case", function () {
 
         let comparisonUserBalanceResult = comparisonUserBalance(userBalanceAfterOpenCase, expectedUserBalanceAfterOpenCase);
         comparisonUserBalanceResult.should.equal(true);
-        browser.click('//button[@class="modal-close"]');
         browser.pause(1000);
     });
     it("Check got item on the Got tab in the User Profile", function () {
