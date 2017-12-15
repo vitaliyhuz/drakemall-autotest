@@ -41,7 +41,7 @@ describe("Login with registered User account", function () {
         balanceTitle.should.equal('Your balance');
         const balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        const addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
+        const addFundButton = browser.isExisting('//a[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
     });
 });
@@ -128,9 +128,13 @@ describe("Open Case", function () {
         browser.click('//button[@class="modal-close"]');
         browser.pause(3000);
     });
-    // it("Check Live drop", function () {
-    //     //Add test after add name of item in Live drop
-    // });
+    it("Check got item in Live drop", function () {
+        const liveDropArray = $$('.onlinedrop-item-product');
+        const gotItemInArray = liveDropArray[0];
+        const titleOfItemInArray = gotItemInArray.getAttribute('title');
+        console.log(gotItemName);
+        titleOfItemInArray.should.equal(gotItemName);
+    });
     it("Check User balance and total opens cases value after opening box", function () {
         const totalOpenedCasesValueAfterOpenCase = parseInt(browser.getText('//span[@class="header-stats-count"]')[1],10);
         const userBalanceAfterOpenCase = parseFloat(browser.getText('//div[@class="header-balance-value"]').substr(1).replace(new RegExp(/\s/, 'g'), ''));
@@ -153,6 +157,7 @@ describe("Open Case", function () {
         comparisonUserBalanceResult.should.equal(true);
         browser.pause(1000);
     });
+
     it("Check got item on the Got tab in the User Profile", function () {
         browser.click('//div[@class="profile-image"]');
         browser.pause(1000);
@@ -165,7 +170,7 @@ describe("Open Case", function () {
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
-        browser.pause(1000);
+        browser.pause(5000);
     });
 });
 
