@@ -11,7 +11,7 @@ let userBalanceBeforeOpenCase;
 let gotItemName;
 let gotItemPrice;
 //Delete after add "Add funds" test
-const tempUsername = "AutomationUA";
+const tempUsername = "AutomationTemp";
 const tempUserEmail = "tempUser@test.com";
 const tempUserPassword = "!QAZ2wsx";
 ////////////////////////////////////
@@ -48,9 +48,9 @@ describe("Login with registered User account", function () {
 
 describe("Check Case", function () {
     it("Open View page of Case", function () {
-        nameOfcase = browser.getText('//h1[.="Smart Box"]');
-        priceOfCase = browser.getText('//h1[.="Smart Box"]/following-sibling::div[1]');
-        browser.click('//h1[.="Smart Box"]');
+        nameOfcase = browser.getText('//h1[.="Smart Case"]');
+        priceOfCase = browser.getText('//h1[.="Smart Case"]/following-sibling::div[1]');
+        browser.click('//h1[.="Smart Case"]');
         browser.pause(1000);
     });
     it("Check opened Case", function () {
@@ -63,7 +63,7 @@ describe("Check Case", function () {
         const roulette = browser.isExisting('//div[@class="roulette-container"]');
         roulette.should.equal(true);
         const boxContent = browser.getText('//div[@class="box-detail-content"]');
-        boxContent.should.equal('15 Items in the case that you can get\nAmazon Echo Dot\n$40.00\nAmazon Fire TV stick\n$150.00\nWiFi Projector\n$50.00\nXiaomi Mi Brand 2\n$120.00\nLaMetric WiFi Clock\n$90.00\nSmart Home Hub\n$350.00\nVoice controlled car\n$80.00\nEufy RoboVac\n$300.00\nWiFi Drone\n$500.00\nApple Watch Gold\n$600.00\nSamsung Galaxy S8\n$900.00\nIphone X\n$1200.00\nGoPro Hero6\n$400.00\nAmazon Echo\n$40.00\nOculus Rift\n$600.00');
+        boxContent.should.equal('15 Items in the case that you can get\nApple iPhone X\n$999.00\nGoPro HERO6\n$500.00\nApple Watch Series 3\n$399.00\nSamsung Galaxy S8\n$750.00\nOculus Rift\n$435.00\nXiaomi Mi Band 2\n$35.00\nAmazon Echo\n$100.00\nAmazon Echo Dot\n$50.00\nLaMetric Wi-Fi Clock\n$199.00\nWIFI Projector\n$130.00\nAmazon Fire TV Stick\n$40.00\nVoice Control Car\n$35.00\nWiFi Drone\n$60.00\nEufy RoboVac 11\n$220.00\nSmart Home Hub\n$84.00');
     });
     it("Return to Main Page", function () {
         browser.click('//a[@class="header-logo"]');
@@ -73,8 +73,8 @@ describe("Check Case", function () {
 
 // describe("Open Case (Balance 0.00$)", function () {
 //     it("Open View page of Case", function () {
-//         nameOfcase = browser.getText('//h1[.="Smart Box"]');
-//         priceOfCase = browser.getText('//h1[.="Smart Box"]/following-sibling::div[1]');
+//         nameOfcase = browser.getText('//h1[.="Smart Case"]');
+//         priceOfCase = browser.getText('//h1[.="Smart Case"]/following-sibling::div[1]');
 //         browser.click('//h1[.="Smart Box"]');
 //         browser.pause(1000);
 //     });
@@ -104,9 +104,9 @@ describe("Open Case", function () {
         userBalanceBeforeOpenCase = browser.getText('//div[@class="header-balance-value"]');
     });
     it("Open View page of Case", function () {
-        nameOfcase = browser.getText('//h1[.="Smart Box"]');
-        priceOfCase = browser.getText('//h1[.="Smart Box"]/following-sibling::div[1]');
-        browser.click('//h1[.="Smart Box"]');
+        nameOfcase = browser.getText('//h1[.="Smart Case"]');
+        priceOfCase = browser.getText('//h1[.="Smart Case"]/following-sibling::div[1]');
+        browser.click('//h1[.="Smart Case"]');
         browser.pause(1000);
     });
     it("Open Case", function () {
@@ -136,9 +136,9 @@ describe("Open Case", function () {
         titleOfItemInArray.should.equal(gotItemName);
     });
     it("Check User balance and total opens cases value after opening box", function () {
-        const totalOpenedCasesValueAfterOpenCase = parseInt(browser.getText('//span[@class="header-stats-count"]')[1],10);
+        const totalOpenedCasesValueAfterOpenCase = parseInt(browser.getText('//span[@class="header-stats-count"]')[1].replace(new RegExp(/\s/, 'g'), ''),10);
         const userBalanceAfterOpenCase = parseFloat(browser.getText('//div[@class="header-balance-value"]').substr(1).replace(new RegExp(/\s/, 'g'), ''));
-        const expectedTotalOpenedCasesValueAfterOpenCase = parseInt(totalOpenedCasesValueBeforeOpenCase, 10) +1;
+        const expectedTotalOpenedCasesValueAfterOpenCase = parseInt(totalOpenedCasesValueBeforeOpenCase.replace(new RegExp(/\s/, 'g'), ''), 10) +1;
         const expectedUserBalanceAfterOpenCase = parseFloat((userBalanceBeforeOpenCase.substr(1)).replace(new RegExp(/\s/, 'g'), '')) - parseFloat((priceOfCase.substr(1)).replace(new RegExp(/\s/, 'g'), ''));
 
 
