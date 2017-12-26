@@ -40,7 +40,7 @@ describe("Register with Email", function () {
         balanceTitle.should.equal('Your balance');
         const balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        const addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
+        const addFundButton = browser.isExisting('//a[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
 
     });
@@ -77,7 +77,7 @@ describe("Login with Facebook", function () {
         balanceTitle.should.equal('Your balance');
         const balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        const addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
+        const addFundButton = browser.isExisting('//a[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
     });
     it("Logout", function () {
@@ -112,7 +112,7 @@ describe("Login with Facebook", function () {
             balanceTitle.should.equal('Your balance');
             const balanceValue = browser.getText('//div[@class="header-balance-value"]');
             balanceValue.should.equal('$0.00');
-            const addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
+            const addFundButton = browser.isExisting('//a[@class="action-btn header-glow-btn funds-btn"]');
             addFundButton.should.equal(true);
 
         });
