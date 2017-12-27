@@ -4,7 +4,11 @@ const {
     usernameForRegistration
 } = require('../constants');
 const { emailForRegistration } = require('../createdEmail.json');
-
+//Delete after add "Add funds" test
+const tempUsername = "AutomationUA";
+const tempUserEmail = "tempUser@test.com";
+const tempUserPassword = "!QAZ2wsx";
+////////////////////////////////////
 
 describe("Login with registered User account", function () {
     it("Open Login window", function () {
@@ -31,7 +35,7 @@ describe("Login with registered User account", function () {
         balanceTitle.should.equal('Your balance');
         const balanceValue = browser.getText('//div[@class="header-balance-value"]');
         balanceValue.should.equal('$0.00');
-        const addFundButton = browser.isExisting('//button[@class="action-btn header-glow-btn funds-btn"]');
+        const addFundButton = browser.isExisting('//a[@class="action-btn header-glow-btn funds-btn"]');
         addFundButton.should.equal(true);
     });
 });
@@ -58,6 +62,7 @@ describe("Add new address (General info)", function () {
         browser.setValue('//input[@name="building"]','77');
         browser.setValue('//input[@name="apartment"]','9');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
+        browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
         notificationMessage.should.equal(true);
         browser.pause(1000);
@@ -97,6 +102,7 @@ describe("Edit Delivery address", function () {
         browser.setValue('//input[@name="building"]','74');
         browser.setValue('//input[@name="apartment"]','11');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
+        browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
         notificationMessage.should.equal(true);
         browser.pause(1000);
@@ -125,13 +131,13 @@ describe("Add new address (Second)", function () {
         browser.click('//button[@class="btn-profileForm"]');
         const titleOfTab = browser.getText('//h2');
         titleOfTab.should.equal ("Delivery info");
-    });
+      });
     it("Add new address", function () {
         browser.click('//button[@class="add-address"]');
         browser.setValue('//input[@name="firstName"]', 'QA');
         browser.setValue('//input[@name="lastName"]', 'Automation');
         browser.setValue('//input[@name="phone"]', '+380509999999');
-        browser.setValue('//input[@name="country"]','Ukraine');
+      browser.setValue('//input[@name="country"]','Ukraine');
         browser.setValue('//input[@name="region"]','Kyiv city');
         browser.setValue('//input[@name="city"]','Kyiv');
         browser.setValue('//input[@name="zipCode"]','02000');
@@ -139,6 +145,7 @@ describe("Add new address (Second)", function () {
         browser.setValue('//input[@name="building"]','7');
         browser.setValue('//input[@name="apartment"]','10');
         browser.click('//button[contains(@class, "action-btn brand-solid save-btn")]');
+        browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
         notificationMessage.should.equal(true);
         browser.pause(1000);
@@ -169,9 +176,13 @@ describe("Set address as Default", function () {
         browser.pause(1000);
     });
     it("Set as default", function () {
-        const initiAladdressStatus = browser.getText('//div[@class="address-controls"]');
-        initiAladdressStatus[0].should.equal('Default');
-        initiAladdressStatus[1].should.equal('Set as default'); //Check initial address status
+        const arrayInitialAddressStatus = $$('.address-controls span');
+        const initialAddressStatusFirst = arrayInitialAddressStatus[0];
+        const initialAddressStatusSecond = arrayInitialAddressStatus[1];
+        const initialAddressStatusFirstText = initialAddressStatusFirst.getText();
+        const initialAddressStatusSecondText = initialAddressStatusSecond.getText();
+        initialAddressStatusFirstText.should.equal('Default'); //Check initial address status
+        initialAddressStatusSecondText.should.equal('Set as default'); //Check initial address status
         browser.click('//span[.="Set as default"]');
         browser.pause(1000);
         const notificationMessage = browser.isExisting ('//div[@class="notification-container success"]');
@@ -184,9 +195,13 @@ describe("Set address as Default", function () {
         browser.pause(1000);
     });
     it("Check setting Default address on the General info tab", function () {
-        const initiAladdressStatus = browser.getText('//div[@class="address-controls"]');
-        initiAladdressStatus[0].should.equal('Set as default');
-        initiAladdressStatus[1].should.equal('Default');
+        const arrayChangedAddressStatus = $$('.address-controls span');
+        const changedAddressStatusFirst = arrayChangedAddressStatus[0];
+        const changedAddressStatusSecond = arrayChangedAddressStatus[1];
+        const changedAddressStatusFirstText = changedAddressStatusFirst.getText();
+        const changedAddressStatusSecondText = changedAddressStatusSecond.getText();
+        changedAddressStatusFirstText.should.equal('Set as default');
+        changedAddressStatusSecondText.should.equal('Default');
         browser.pause(1000);
     });
     it("Return to Main Page", function () {
@@ -226,8 +241,8 @@ describe("Delete Address", function () {
         addresses = typeof addresses === 'string' ? [addresses] : addresses;
         const quantityOfAddresses = addresses.length;
         quantityOfAddresses.should.equal(1);
-        // const addressStatus = browser.getText('//div[@class="address-controls"]');
-        // addressStatus.should.equal('Default');
+        const addressStatus = browser.getText('//div[@class="address-controls"]');
+        addressStatus.should.equal('Default');
         //Use after fixing bug DRAKE-206
     });
 
@@ -237,3 +252,44 @@ describe("Delete Address", function () {
     });
     //Add test "Check deleting address on the Delivery tab" after completed Game tests!!!
 });
+// describe("Sell Item", function () {
+//     it("Temporary precondition", function () {
+//         browser.click('//button[@class="logout-btn"]');
+//         browser.pause(1000);
+//         browser.click('//button[.="Log In"]');
+//         browser.pause(1000);
+//         const loginWindowTitle = browser.getText('//span[@class="form-title"]');
+//         loginWindowTitle.should.equal('Login');
+//         browser.setValue('#username',tempUserEmail);
+//         browser.setValue('#password',tempUserPassword);
+//         browser.click('//button[contains(@class, "form-submit-btn")]');
+//         browser.pause(3000);
+//     });
+//     it("Open User Profile", function () {
+//         browser.click('//div[@class="profile-image"]');
+//         browser.pause(1000);
+//     });
+//     it("Open General info tab", function () {
+//         browser.click('//button[@class="btn-profileForm"]');
+//         const titleOfTab = browser.getText('//h2');
+//         titleOfTab.should.equal ("Delivery info");
+//     });
+//     it("Open Got tab", function () {
+//         browser.click('//div[@class="profile-image"]');
+//         browser.pause(1000);
+//         browser.click('//button[@class="btn-profileProducts"]');
+//         browser.click('//button[@name="got"]');
+//     });
+//     it("Sell Item", function () {
+//         const nameOfItemForSell = browser.getText('//a[@class="product-title"]');
+//         const priceOfItemForSell = browser.getText('//div[@class="product-item"]//div[@class="price"]');
+//         browser.click('//button[@class="action-btn brand-solid sell"]');
+//         browser.pause(1000);
+//         const sellingWindowTitle = browser.getText('//span[@class="sell-modal-title"]');
+//         sellingWindowTitle.should.equal("Selling product");
+//         const sellingWindowText =  browser.getText('//div[@class="sell-modal-text with-image"]');
+//         // sellingWindowText.should.equal(`Are you sure you want to sell ${nameOfItemForSell} for ${priceOfItemForSell}?\nThe sum will be added to your balance`); Add after fix on the modal window
+//
+//     });
+// });
+
