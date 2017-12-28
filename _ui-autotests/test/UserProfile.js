@@ -4,6 +4,10 @@ const {
     usernameForRegistration
 } = require('../constants');
 const { emailForRegistration } = require('../createdEmail.json');
+
+let nameOfItemForSell;
+let priceOfItemForSell;
+let userBalanceBeforeSelling;
 //Delete after add "Add funds" test
 const tempUsername = "AutomationUA";
 const tempUserEmail = "tempUser@test.com";
@@ -252,44 +256,57 @@ describe("Delete Address", function () {
     });
     //Add test "Check deleting address on the Delivery tab" after completed Game tests!!!
 });
-// describe("Sell Item", function () {
-//     it("Temporary precondition", function () {
-//         browser.click('//button[@class="logout-btn"]');
-//         browser.pause(1000);
-//         browser.click('//button[.="Log In"]');
-//         browser.pause(1000);
-//         const loginWindowTitle = browser.getText('//span[@class="form-title"]');
-//         loginWindowTitle.should.equal('Login');
-//         browser.setValue('#username',tempUserEmail);
-//         browser.setValue('#password',tempUserPassword);
-//         browser.click('//button[contains(@class, "form-submit-btn")]');
-//         browser.pause(3000);
-//     });
-//     it("Open User Profile", function () {
-//         browser.click('//div[@class="profile-image"]');
-//         browser.pause(1000);
-//     });
-//     it("Open General info tab", function () {
-//         browser.click('//button[@class="btn-profileForm"]');
-//         const titleOfTab = browser.getText('//h2');
-//         titleOfTab.should.equal ("Delivery info");
-//     });
-//     it("Open Got tab", function () {
-//         browser.click('//div[@class="profile-image"]');
-//         browser.pause(1000);
-//         browser.click('//button[@class="btn-profileProducts"]');
-//         browser.click('//button[@name="got"]');
-//     });
-//     it("Sell Item", function () {
-//         const nameOfItemForSell = browser.getText('//a[@class="product-title"]');
-//         const priceOfItemForSell = browser.getText('//div[@class="product-item"]//div[@class="price"]');
-//         browser.click('//button[@class="action-btn brand-solid sell"]');
-//         browser.pause(1000);
-//         const sellingWindowTitle = browser.getText('//span[@class="sell-modal-title"]');
-//         sellingWindowTitle.should.equal("Selling product");
-//         const sellingWindowText =  browser.getText('//div[@class="sell-modal-text with-image"]');
-//         // sellingWindowText.should.equal(`Are you sure you want to sell ${nameOfItemForSell} for ${priceOfItemForSell}?\nThe sum will be added to your balance`); Add after fix on the modal window
-//
-//     });
-// });
+describe("Sell Item", function () {
+    it("Temporary precondition", function () {
+        browser.click('//button[@class="logout-btn"]');
+        browser.pause(1000);
+        browser.click('//button[.="Log In"]');
+        browser.pause(1000);
+        const loginWindowTitle = browser.getText('//span[@class="form-title"]');
+        loginWindowTitle.should.equal('Login');
+        browser.setValue('#username',tempUserEmail);
+        browser.setValue('#password',tempUserPassword);
+        browser.click('//button[contains(@class, "form-submit-btn")]');
+        browser.pause(3000);
+    });
+    it("Open User Profile", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+    });
+    it("Open General info tab", function () {
+        browser.click('//button[@class="btn-profileForm"]');
+        const titleOfTab = browser.getText('//h2');
+        titleOfTab.should.equal ("Delivery info");
+    });
+    it("Open Got tab", function () {
+        browser.click('//div[@class="profile-image"]');
+        browser.pause(1000);
+        browser.click('//button[@class="btn-profileProducts"]');
+        browser.click('//button[@name="got"]');
+    });
+    it("Sell Item", function () {
+        userBalanceBeforeSelling = parseFloat(browser.getText('//div[@class="header-balance-value"]').substr(1).replace(new RegExp(/\s/, 'g'), ''));
+        nameOfItemForSell = browser.getText('//a[@class="product-title"]');
+        priceOfItemForSell = browser.getText('//div[@class="product-item"]//div[@class="price"]');
+        browser.click('//button[@class="action-btn brand-solid sell"]');
+        browser.pause(1000);
+        const sellingWindowTitle = browser.getText('//span[@class="sell-modal-title"]');
+        sellingWindowTitle.should.equal("Selling product");
+        const sellingWindowText =  browser.getText('//div[@class="sell-modal-text with-image"]');
+        sellingWindowText.should.equal(`Are you sure you want to sell ${nameOfItemForSell} for ${priceOfItemForSell}?\nThe sum will be added to your balance`); //Add after fix on the modal window
+        browser.click('//button[@class="action-btn brand-solid sell-modal-submit-btn"]');
+        browser.pause(1000);
+    });
+    it("Check selling of item", function () {
+        const userBalanceAfterSelling = parseFloat(browser.getText('//div[@class="header-balance-value"]').substr(1).replace(new RegExp(/\s/, 'g'), ''));
+        const priceOfItemForSellFloat = parseFloat(priceOfItemForSell.substr(1).replace(new RegExp(/\s/, 'g'), ''));
+        const expectedUserBalanceAfterSelling = (userBalanceBeforeSelling + priceOfItemForSellFloat);
+        function comparisonUserBalance (userBalanceAfterSelling, expectedUserBalanceAfterSelling) {
+            return userBalanceAfterSelling === expectedUserBalanceAfterSelling
+        }
+
+        let comparisonUserBalanceResult = comparisonUserBalance(userBalanceAfterSelling, expectedUserBalanceAfterSelling);
+        comparisonUserBalanceResult.should.equal(true);
+    });
+});
 
